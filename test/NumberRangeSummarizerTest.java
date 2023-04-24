@@ -96,6 +96,16 @@ public class NumberRangeSummarizerTest {
     }
 
     @Test
+    public void testsummarizeCollection_Range_Sequence() {
+        Collection<Integer> input = Arrays.asList(1,2,5,4,7,8, 10,11,12);
+
+        String expectedOutput = "1-2, 4-5, 7-8, 10-12";
+
+        String result = underTest.summarizeCollection(input);
+        Assert.assertEquals(expectedOutput, result);
+    }
+
+    @Test
     public void testsummarizeCollection_Fail() {
         Collection<Integer> input = Arrays.asList(1,3,4,6,7,8, 10);
 
