@@ -126,4 +126,17 @@ public class NumberRangeSummarizerTest {
         Assert.assertEquals(expectedOutput, result);
     }
 
+
+    @Test
+    public void testsummarizeCollection_Unsorted() {
+        Collection<Integer> input = Arrays.asList(1, 3, 7, 9, 4, 6, 7, 8, 11);
+
+        String expectedOutput = "1, 3-4, 6-9, 11";
+
+        String result = underTest.summarizeCollection(input);
+        Assert.assertEquals(expectedOutput, result);
+    }
+
+
+
 }

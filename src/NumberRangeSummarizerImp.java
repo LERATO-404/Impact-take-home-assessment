@@ -3,8 +3,6 @@ import java.util.stream.Collectors;
 
 public class NumberRangeSummarizerImp implements NumberRangeSummarizer {
 
-    static Collection<Integer> collection = new ArrayList<>();
-
     @Override
     public Collection<Integer> collect(String input) {
 
@@ -17,19 +15,20 @@ public class NumberRangeSummarizerImp implements NumberRangeSummarizer {
 
     @Override
     public String summarizeCollection(Collection<Integer> input){
-        List<Integer> outputList = new ArrayList<>(input);
-        if(outputList.size() < 1){
+        List<Integer> inputList = input.stream()
+                .sorted()
+                .distinct()
+                .collect(Collectors.toList());
+
+        if(inputList.size() < 1){
             return "";
         }
-        outputList.sort(Comparator.naturalOrder());
+
         List<String> summaryOutputList = new ArrayList<>();
-        int start = outputList.get(0);
+        int start = inputList.get(0);
         int prev = start;
-        for(int i = 1; i < outputList.size(); i++){
-            int current = outputList.get(i);
-            if(current == prev){
-                continue; //  skip duplicates
-            }
+        for(int i = 1; i < inputList.size(); i++){
+            int current = inputList.get(i);
             if(current != prev + 1) {
                 Boolean out = (prev == start) ? summaryOutputList.add(String.valueOf(prev)):summaryOutputList.add(String.format("%d-%d", start, prev));
 
