@@ -30,13 +30,20 @@ public class NumberRangeSummarizerImp implements NumberRangeSummarizer {
         for(int i = 1; i < inputList.size(); i++){
             int current = inputList.get(i);
             if(current != prev + 1) {
-                Boolean out = (prev == start) ? summaryOutputList.add(String.valueOf(prev)):summaryOutputList.add(String.format("%d-%d", start, prev));
-
+                if(prev == start){
+                    summaryOutputList.add(String.valueOf(prev));
+                }else{
+                    summaryOutputList.add(String.format("%d-%d", start, prev));
+                }
                 start = current;
             }
             prev = current;
         }
-        Boolean out = (prev == start) ? summaryOutputList.add(String.valueOf(prev)):summaryOutputList.add(String.format("%d-%d", start, prev));
+        if(prev == start){
+            summaryOutputList.add(String.valueOf(prev));
+        }else{
+            summaryOutputList.add(String.format("%d-%d", start, prev));
+        }
         return String.join(", ",summaryOutputList.toString().split("[\\[\\]]")[1].split(", "));
     }
 }
